@@ -1,0 +1,26 @@
+component XX.Sample
+# Component Isolation Definition
+metamodelVersion 1.6
+# -------------------------------------------------
+public method XXVFtValidation ()
+
+{
+    jBC: XX.V.FT.VALIDATION
+    
+}
+ 
+public table Customer {
+    t24: CUSTOMER
+    fields:{
+        EbCusLegalId(EB.CUS.LEGAL.ID)=1
+    }
+}
+
+
+
+private method extractCategDetails (
+)
+{
+    jBC: EXTRACT.CATEG.DETAILS
+}
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.temenos.maven</groupId>
+        <artifactId>t24-core-tafj</artifactId>
+        <version>19.172</version>
+    </parent>
+
+    <groupId>com.odcgroup.tafj.package</groupId>
+    <artifactId>Training2-data-code</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>tafj-project</packaging>
+  
+    <build>
+        <plugins>
+            <!-- Clean existing java files -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>${basedir}/src/main/java</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+                 <executions>
+                    <execution>
+						<id>default-compile</id>
+						<phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+	
+	<profiles>
+        <profile>
+            <activation>
+                <property>
+                    <name>ds.package.insertFiles</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+		                <artifactId>maven-antrun-plugin</artifactId>
+		                <executions>
+		                    <execution>
+		                        <phase>process-resources</phase>
+		                        <configuration>
+		                            <target>
+		                                <copy flatten="true" includeEmptyDirs="false" todir="${basedir}/target/classes/INSERTS">
+		                                    <fileset dir="${basedir}/src/Source">
+		                                        <include name="**/I_*"/>
+		                                    </fileset>
+		                                </copy>
+		                            </target>
+		                        </configuration>
+		                        <goals>
+		                            <goal>run</goal>
+		                        </goals>
+		                    </execution>
+		                </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.temenos.tafj</groupId>
+            <artifactId>TAFJCore</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.temenos.tafj</groupId>
+            <artifactId>TAFJBASIC</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
