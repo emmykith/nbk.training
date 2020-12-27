@@ -21,6 +21,7 @@ SUBROUTINE XX.V.FT.VALIDATION
     creditAmount = EB.SystemTables.getRNew(ST.Customer.Customer.EbCusLegalId)
     IF creditAmount > 500 THEN
         EB.SystemTables.setE('Amount greater than 500 (DS packager demo)')
+        *CHANGES MADE
     END
 
 RETURN
